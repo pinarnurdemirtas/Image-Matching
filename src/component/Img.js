@@ -44,7 +44,7 @@ const ImageCardList = () => {
             duration: 1,
           });
           setFlippedcard([]);
-        }, 800);
+        }, 700);
 
         return () => clearTimeout(timer);
       }
