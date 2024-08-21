@@ -1,0 +1,53 @@
+.flip-card-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 200px); 
+    grid-template-rows: repeat(3, 250px);
+    gap: 30px; 
+    justify-content: center; 
+    margin-top: 95px; 
+  }
+  
+  .flip-card {
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    
+  }
+  
+  .flip-card-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+  
+  .baslik{
+    display: flex;
+    justify-content: center; 
+    color: aliceblue;
+    position: absolute;
+    font-family: "Honk", system-ui;
+    font-size: 40px;
+    font-variation-settings:
+      "MORF" 15,
+      "SHLN" 50;
+  }
