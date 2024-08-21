@@ -56,8 +56,8 @@
 
     .flip-card-grid {
       display: grid;
-      grid-template-columns: repeat(3, 100px); 
-      grid-template-rows: repeat(4, 150px);
+      grid-template-columns: repeat(2, 100px); 
+      grid-template-rows: repeat(6, 150px);
       gap: 130px; 
       
     }
