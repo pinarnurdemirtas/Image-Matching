@@ -51,3 +51,13 @@
       "MORF" 15,
       "SHLN" 50;
   }
+
+  @media (max-width: 600px) {
+
+    .flip-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 200px); 
+      grid-template-rows: repeat(4, 250px);
+      gap: 30px; 
+    }
+  }
