@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, notification } from "antd";
+import _ from 'lodash';
 import "./flip.css";
 
 const images = [
@@ -17,16 +18,23 @@ const images = [
   "https://i.pinimg.com/236x/09/99/90/0999909cf0cb6a09dbf28b75f3ee7cfb.jpg",
 ];
 
-const ImageCardList = () => {
+const shuffleArray = (array) => {
+  return _.shuffle(array);
+};
+const shuffledImg = shuffleArray(images);
+
+
+
+const Img = () => {
+
   const [flippedcard, setFlippedcard] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
-
+  
   useEffect(() => {
     if (flippedcard.length === 2) {
       const [firstcard, secondcard] = flippedcard;
 
-      if (images[firstcard] === images[secondcard]) {
-        // Kartlar eşleştiğinde
+      if (shuffledImg[firstcard] === shuffledImg[secondcard]) {
         setMatchedCards((matching) => [...matching, firstcard, secondcard]);
 
         notification.success({
@@ -36,7 +44,6 @@ const ImageCardList = () => {
         });
         setFlippedcard([]);
       } else {
-        // Kartlar eşleşmediğinde
         const timer = setTimeout(() => {
           notification.error({
             message: "Başarısız",
@@ -51,8 +58,15 @@ const ImageCardList = () => {
     }
   }, [flippedcard]);
 
+  useEffect(() => {
+    if (matchedCards.length === images.length) {
+      alert("Oyun bitti! Tüm kartlar eşleşti.");
+      window.location.reload();
+    }
+  }, [matchedCards]);
+
+
   const handleFlip = (index) => {
-    // Eğer kart daha önce eşleştiyse işlem yapma
     if (matchedCards.includes(index) || flippedcard.includes(index)) {
       return;
     }
@@ -60,24 +74,23 @@ const ImageCardList = () => {
     setFlippedcard((matching) =>
       matching.length === 2 ? [index] : [...matching, index]
     );
+
   };
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <h1 className="baslik">CARD MATCHİNG</h1>
       <div className="flip-card-grid">
-        {images.map((image, index) => (
+        {shuffledImg.map((image, index) => (
           <div
             key={index}
-            className="flip-card"
             onClick={() => handleFlip(index)}
           >
             <div
-              className={`flip-card-inner ${
-                flippedcard.includes(index) || matchedCards.includes(index)
+              className={`flip-card-inner ${flippedcard.includes(index) || matchedCards.includes(index)
                   ? "flipped"
                   : ""
-              }`}
+                }`}
             >
               <div className="flip-card-front">
                 <Card
@@ -111,4 +124,4 @@ const ImageCardList = () => {
   );
 };
 
-export default ImageCardList;
+export default Img;
